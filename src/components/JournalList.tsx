@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {AiFillDelete} from 'react-icons/ai'
 
@@ -34,6 +34,7 @@ export default function JournalList() {
           const { journal, date } = item
           return (
             <div key={index}
+            className='flex hover:bg-slate-300 px-2 py-1 transition-all duration-100'
             >      
               <span className='me-2'>
                 <button onClick={() => dispatch(deleteJournal(index))}
@@ -46,10 +47,10 @@ export default function JournalList() {
               <span className='me-4 text-sm opacity-50'>
                 {index + 1}
               </span>
-              <span>
+              <span className='me-auto'>
               {journal}              
               </span>
-              <span>
+              <span className='ms-auto'>
                 {date}  
               </span>         
             </div>

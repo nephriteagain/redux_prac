@@ -23,9 +23,10 @@ const journalSlice = createSlice({
     },
     editJournal: (state, action) => {
       const {journalIndex, edit} = action.payload
-      const journalToEdit = state.find((journal, index) => index === journalIndex)
+      const journalToEdit = state.find((_, index) => index === journalIndex)
+      const date : string = new Date(Date.now()).toDateString()
       if (journalToEdit) {
-       state[journalIndex] = edit
+       state[journalIndex] = {journal: edit, date: date}
       }
     },
     deleteJournal: (state, action) => {
