@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {AiFillDelete} from 'react-icons/ai'
 
 import { deleteJournal } from '../features/journal/journalSlice'
 
-
+interface item {
+  journal: string,
+  date: string
+}
 
 
 export default function JournalList() {
@@ -12,10 +15,23 @@ export default function JournalList() {
   const journalList = useSelector(state => state.journal)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+
+    function deleteHotkey(e) {
+      if (e.key === ';' || e.key === ':') {
+        dispatch(deleteJournal(0))
+      }
+    }    
+    window.addEventListener('keypress', deleteHotkey)
+    return () => window.removeEventListener('keypress', deleteHotkey)
+  }, [])
+
+
   if (journalList.length) {
     return (
       <div className='px-4 py-4' >
-        {journalList.map((journal : string [], index : number) => {
+        {journalList.map((item: item, index : number) => {
+          const { journal, date } = item
           return (
             <div key={index}
             >      
@@ -32,6 +48,9 @@ export default function JournalList() {
               </span>
               <span>
               {journal}              
+              </span>
+              <span>
+                {date}  
               </span>         
             </div>
           )

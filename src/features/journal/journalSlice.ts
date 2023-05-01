@@ -1,13 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const journalList : string[] = []
+interface journalList {
+  journal: string,
+  date: string
+}
+
+const journalList : journalList[] = []
 
 const journalSlice = createSlice({
   name: 'journal',
   initialState: journalList,
   reducers: {
     addJournal: (state, action) => {
-      return [action.payload, ...state]
+      const date : string = new Date(Date.now()).toDateString()
+      return [
+        {
+          journal: action.payload,
+          date: date
+        }
+        , ...state
+      ]
     },
     editJournal: (state, action) => {
       const {journalIndex, edit} = action.payload

@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { addJournal } from '../features/journal/journalSlice'
 
 export default function CreateJournal() {
   const [ journalEntry, setJournalEntry ] = useState('')
+
 
   const dispatch = useDispatch()
 
@@ -35,7 +36,7 @@ export default function CreateJournal() {
           type="text" 
           name="journal" 
           value={journalEntry}
-          placeholder='...'
+          placeholder='. . .'
           onChange={journalEntryText}
         />
         <input type="submit" value='Save'
